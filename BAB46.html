@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB46</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Kosakata</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 15px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .wrong { color: red; }
+  .correct { color: green; }
+  ol { text-align:left; max-height:400px; overflow:auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <input type="text" id="answerInput" placeholder="Tulis jawaban di sini">
+  <br>
+  <button id="nextBtn">Selanjutnya</button>
+</div>
+
+<script>
+let questions = [
+{ soal: "사육관리", jawaban: "pengelolaan ternak" },
+{ soal: "우방", jawaban: "kios / kandang" },
+{ soal: "육류소비", jawaban: "konsumsi daging" },
+{ soal: "톱밥", jawaban: "serbuk gergaji" },
+{ soal: "사료 / 먹이", jawaban: "pakan" },
+{ soal: "이동시키다", jawaban: "memindahkan" },
+{ soal: "짚, 건초", jawaban: "jerami, rumput kering" },
+{ soal: "별일 없어요", jawaban: "tidak ada yang istimewa" },
+{ soal: "바가지", jawaban: "gayung" },
+{ soal: "꼽하다", jawaban: "memilih" },
+{ soal: "급이기", jawaban: "pemberi pakan" },
+{ soal: "찜닭", jawaban: "ayam kukus" },
+{ soal: "사료조", jawaban: "tempat pakan" },
+{ soal: "닭갈비", jawaban: "iga ayam" },
+{ soal: "조사료", jawaban: "pakan ternak kasar" },
+{ soal: "프라이드치킨", jawaban: "ayam goreng" },
+{ soal: "배합사료", jawaban: "pakan majemuk" },
+{ soal: "고급의 식재료", jawaban: "bahan makanan kualitas tinggi" },
+{ soal: "급수기", jawaban: "pemberi air" },
+{ soal: "인식되다", jawaban: "diakui" },
+{ soal: "계량컵", jawaban: "gelas ukur" },
+{ soal: "대명사", jawaban: "kata ganti" },
+{ soal: "양우농가", jawaban: "peternakan domba" },
+{ soal: "채식주의자", jawaban: "vegetarian" },
+{ soal: "소농장 / 소축사", jawaban: "peternakan sapi / kandang sapi" },
+{ soal: "비건제품", jawaban: "produk vegan" },
+{ soal: "돼지농장 / 돼지축사", jawaban: "peternakan babi / kandang babi" },
+{ soal: "수요", jawaban: "permintaan" },
+{ soal: "닭농장 / 양계장", jawaban: "peternakan ayam" },
+{ soal: "순서", jawaban: "urutan" },
+{ soal: "분뇨탱크", jawaban: "tangki penyimpan kotoran" },
+{ soal: "유무", jawaban: "ada atau tidak ada" }
+];
+
+// Acak soal
+questions = questions.sort(() => Math.random() - 0.5);
+
+let index = 0;
+let score = 0;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answerInput");
+const nextBtn = document.getElementById("nextBtn");
+const card = document.querySelector(".card");
+
+function showQuestion() {
+  questionEl.textContent = "Soal " + (index + 1) + ": " + questions[index].soal;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+nextBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  userAnswers[index] = userAnswer; // simpan jawaban sesuai index
+
+  if (userAnswer === questions[index].jawaban) {
+    score++;
+  }
+
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  let answerList = "";
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.jawaban) {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span></li>`;
+    } else {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span><br>
+                     Jawaban kamu: <span class="wrong">${userAnswers[i] || "(kosong)"}</span></li>`;
+    }
+  });
+
+  card.innerHTML = `
+    <h2>Hasil</h2>
+    <p class="result">Nilai: ${score} / ${questions.length}</p>
+    <hr>
+    <p>Kunci Jawaban:</p>
+    <ol>${answerList}</ol>
+  `;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
